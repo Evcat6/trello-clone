@@ -3,3 +3,8 @@
 for = “/"
 [headers.values]
 Access-Control-Allow-Origin = "”
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
