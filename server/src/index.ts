@@ -1,6 +1,5 @@
 import { createServer } from "http";
 import { Server, Socket } from "socket.io";
-import cors from 'cors';
 
 import { lists } from "./assets/mockData";
 import { Database } from "./data/database";
@@ -16,11 +15,11 @@ const io = new Server(httpServer, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true
   },
 });
 
-
-io.use(cors());
 
 const db = Database.Instance;
 const reorderService = new ReorderService()
