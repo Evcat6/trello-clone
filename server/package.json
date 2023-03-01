@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon ./src/index.ts",
     "build": "tsc",
-    "start": "node build/server.js"
+    "start": "node dist/index.js"
   },
   "author": "Vitalii Yarmus",
   "license": "MIT",
