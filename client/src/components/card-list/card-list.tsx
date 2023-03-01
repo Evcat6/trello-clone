@@ -1,14 +1,14 @@
 import type {
   DroppableProvided,
   DroppableStateSnapshot,
-} from '@hello-pangea/dnd';
-import { Droppable } from '@hello-pangea/dnd';
-import { CSSProperties } from 'react';
+} from "@hello-pangea/dnd";
+import { Droppable } from "@hello-pangea/dnd";
+import { CSSProperties } from "react";
 
-import type { Card } from '../../common/types';
-import { List } from './components/list';
-import { ListWrapper } from './styled/list-wrapper';
-import { ScrollContainer } from './styled/scroll-container';
+import type { Card } from "../../common/types";
+import { List } from "./components/list";
+import { ListWrapper } from "./styled/list-wrapper";
+import { ScrollContainer } from "./styled/scroll-container";
 
 type Props = {
   listId: string;
@@ -17,12 +17,12 @@ type Props = {
   style: CSSProperties;
 };
 
-const CardsList = ({ listId, listType, style, cards }: Props) => {
+function CardsList({ listId, listType, style, cards }: Props) {
   return (
     <Droppable droppableId={listId} type={listType}>
       {(
         dropProvided: DroppableProvided,
-        dropSnapshot: DroppableStateSnapshot,
+        dropSnapshot: DroppableStateSnapshot
       ) => (
         <ListWrapper
           style={style}
@@ -31,12 +31,12 @@ const CardsList = ({ listId, listType, style, cards }: Props) => {
           {...dropProvided.droppableProps}
         >
           <ScrollContainer>
-            <List cards={cards} dropProvided={dropProvided} />
+            <List cards={cards} listId={listId} dropProvided={dropProvided} />
           </ScrollContainer>
         </ListWrapper>
       )}
     </Droppable>
   );
-};
+}
 
 export { CardsList };

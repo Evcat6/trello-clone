@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
-import { GRID } from '../../../common/constants';
+import { GRID } from "../../../common/constants";
 
 const DropZone = styled.div`
   min-height: 1px;

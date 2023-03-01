@@ -1,12 +1,12 @@
-import { colors } from '@atlaskit/theme';
-import styled from '@emotion/styled';
-import type { DroppableProvidedProps } from '@hello-pangea/dnd';
+import { colors } from "@atlaskit/theme";
+import styled from "@emotion/styled";
+import type { DroppableProvidedProps } from "@hello-pangea/dnd";
 
-import { GRID } from '../../../common/constants';
+import { GRID } from "../../../common/constants";
 
 const getBackgroundColor = (
   isDraggingOver: boolean,
-  isDraggingFrom: boolean,
+  isDraggingFrom: boolean
 ): string => {
   if (isDraggingOver) {
     return colors.R50;

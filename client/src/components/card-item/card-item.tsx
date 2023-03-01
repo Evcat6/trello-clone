@@ -1,6 +1,6 @@
 import type { DraggableProvided } from "@hello-pangea/dnd";
-import React from "react";
 
+import { useSocket } from "../../hooks/useSocketContext";
 import type { Card } from "../../common/types";
 import { CopyButton } from "../primitives/copy-button";
 import { DeleteButton } from "../primitives/delete-button";
@@ -10,14 +10,38 @@ import { Title } from "../primitives/title";
 import { Container } from "./styled/container";
 import { Content } from "./styled/content";
 import { Footer } from "./styled/footer";
+import { CardEvent } from "../../common/enums";
 
 type Props = {
   card: Card;
   isDragging: boolean;
   provided: DraggableProvided;
+  listId: string;
 };
 
-export const CardItem = ({ card, isDragging, provided }: Props) => {
+export function CardItem({ card, isDragging, provided, listId }: Props) {
+  const socket = useSocket();
+
+  const onDuplicate = (): void => {
+    socket.emit(CardEvent.DUPLICATE, { listId, cardId: card.id });
+  };
+
+  const onDeleteCard = (): void => {
+    socket.emit(CardEvent.DELETE, listId, card.id);
+  };
+
+  const onNameUpdate = (name: string): void => {
+    socket.emit(CardEvent.CHANGE_NAME, { listId, cardId: card.id, name });
+  };
+
+  const onDescriptionUpdate = (description: string): void => {
+    socket.emit(CardEvent.CHANGE_DESCRIPTION, {
+      listId,
+      cardId: card.id,
+      description,
+    });
+  };
+
   return (
     <Container
       className="card-container"
@@ -31,18 +55,18 @@ export const CardItem = ({ card, isDragging, provided }: Props) => {
     >
       <Content>
         <Title
-          onChange={() => {}}
+          onChange={onNameUpdate}
           title={card.name}
           fontSize="large"
-          bold={true}
+          bold
         />
-        <Text text={card.description} onChange={() => {}} />
+        <Text text={card.description} onChange={onDescriptionUpdate} />
         <Footer>
-          <DeleteButton onClick={() => {}} />
+          <DeleteButton onClick={onDeleteCard} />
           <Splitter />
-          <CopyButton onClick={() => {}} />
+          <CopyButton onClick={onDuplicate} />
         </Footer>
       </Content>
     </Container>
   );
-};
+}
