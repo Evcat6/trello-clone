@@ -8,7 +8,7 @@ import { ListHandler } from "./handlers/list.handler";
 import { ReorderService } from "./services/reorder.service";
 import { ReorderServiceProxy } from './proxy/reorderProxy'
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
@@ -18,10 +18,6 @@ const io = new Server(httpServer, {
   },
 });
 
-// httpServer.on('request', (request) => {
-//   const { rawHeaders, httpVersion, method, socket, url } = request;
-//   console.log('Info:', method, url)
-// })
 
 const db = Database.Instance;
 const reorderService = new ReorderService()
