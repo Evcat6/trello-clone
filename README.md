@@ -21,7 +21,11 @@ npm i
 2. Start backend
 
 ```
-npm run dev -w server
+To start in dev mode: npm run dev -w server
+
+To start in production mode: npm start -w server
+
+To build: npm run build -w server
 ```
 
 3. Start client
@@ -29,3 +33,5 @@ npm run dev -w server
 ```
 npm run dev -w client
 ```
+
+# PS. Please before running project in the server and client folder create a file .env and copy the contents of the file .env.example into it.
