@@ -6,23 +6,26 @@ import { Database } from "./data/database";
 import { CardHandler } from "./handlers/card.handler";
 import { ListHandler } from "./handlers/list.handler";
 import { ReorderService } from "./services/reorder.service";
-import { ReorderServiceProxy } from './proxy/reorderProxy'
+import { ReorderServiceProxy } from "./proxy/reorderProxy";
 
 const PORT = process.env.PORT || 3001;
 
 const httpServer = createServer();
+
 const io = new Server(httpServer, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
-    allowedHeaders: ["my-custom-header"],
-    credentials: true
+    credentials: true,
   },
 });
 
+httpServer.on("error", (err) => {
+  console.assert(err);
+});
 
 const db = Database.Instance;
-const reorderService = new ReorderService()
+const reorderService = new ReorderService();
 const reorderServiceProxy = new ReorderServiceProxy(reorderService);
 
 if (process.env.NODE_ENV !== "production") {

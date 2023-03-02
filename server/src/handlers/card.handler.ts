@@ -1,7 +1,6 @@
 import type { Socket } from "socket.io";
 
 import { CardEvent } from "../common/enums";
-import { CardPrototype } from "../utils/cardPrototype";
 import { Card } from "../data/models/card";
 import { SocketHandler } from "./socket.handler";
 
@@ -92,8 +91,7 @@ export class CardHandler extends SocketHandler {
 
     const indexOfCard = list.cards.indexOf(cardToDuplicate);
 
-    const cardCopy = new CardPrototype(cardToDuplicate);
-    const newCard = cardCopy.clone();
+    const newCard = cardToDuplicate.clone();
     const updatedList = { ...list };
     updatedList.cards.splice(indexOfCard, 0, newCard);
 

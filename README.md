@@ -21,7 +21,7 @@ npm i
 2. Start backend
 
 ```
-npm start -w server
+npm run dev -w server
 ```
 
 3. Start client
