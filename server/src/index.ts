@@ -20,9 +20,6 @@ const io = new Server(httpServer, {
   },
 });
 
-httpServer.on("error", (err) => {
-  console.assert(err);
-});
 
 const db = Database.Instance;
 const reorderService = new ReorderService();

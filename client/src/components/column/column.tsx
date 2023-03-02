@@ -1,5 +1,4 @@
 import { colors } from "@atlaskit/theme";
-import { useContext } from "react";
 import type {
   DraggableProvided,
   DraggableStateSnapshot,
@@ -28,12 +27,16 @@ type Props = {
 export function Column({ listId, listName, cards, index }: Props) {
   const socket = useSocket();
 
-  const onCreateCard = (cardName: string) => {
+  const onCreateCard = (cardName: string): void => {
     socket.emit(CardEvent.CREATE, listId, cardName);
   };
 
   const onRemoveList = (): void => {
     socket.emit(ListEvent.DELETE, listId);
+  };
+
+  const onChangeListName = (name: string): void => {
+    socket.emit(ListEvent.CHANGE_NAME, { listId, name });
   };
 
   return (
@@ -52,7 +55,7 @@ export function Column({ listId, listName, cards, index }: Props) {
             <Title
               aria-label={listName}
               title={listName}
-              onChange={() => {}}
+              onChange={onChangeListName}
               fontSize="large"
               width={200}
               bold

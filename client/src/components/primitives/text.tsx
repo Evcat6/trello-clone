@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 import { useComponentVisible } from "../../hooks/useComponentVisible";
 import { BasicText } from "./styled/basic-text";
@@ -13,6 +13,9 @@ type Props = {
 export function Text({ onChange, text }: Props) {
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false);
+
+  useEffect(() => setValue(text), [text]);
+
   const [value, setValue] = useState(text);
 
   const onEdit = (e: ChangeEvent<HTMLTextAreaElement>) => {

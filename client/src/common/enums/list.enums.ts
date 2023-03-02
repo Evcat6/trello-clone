@@ -5,6 +5,7 @@ enum ListEvent {
   UPDATE = "list:update",
   RENAME = "list:rename",
   DELETE = "list:delete",
+  CHANGE_NAME = "list:change-title",
 }
 
 export { ListEvent };
