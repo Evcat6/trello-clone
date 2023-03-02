@@ -1,5 +1,6 @@
 import { createServer } from "http";
 import { Server, Socket } from "socket.io";
+import { appendFile } from 'fs';
 
 import { lists } from "./assets/mockData";
 import { Database } from "./data/database";
@@ -20,6 +21,18 @@ const io = new Server(httpServer, {
   },
 });
 
+// PATTERN:{Observer}
+httpServer.on('request', (req, res) => {
+    const { method, url } = req;
+    const { statusCode: resStatusCode, statusMessage } = res;
+    const requestContent = `Request ${method} ${url} \n`;
+
+    appendFile('./app.log', requestContent , () => {});
+
+    const responseContent = `Response ${resStatusCode} ${statusMessage} \n`;
+
+    appendFile('./app.log', responseContent, () => {})
+});
 
 const db = Database.Instance;
 const reorderService = new ReorderService();
